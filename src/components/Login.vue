@@ -1,6 +1,8 @@
 <template>
   <div class="login navbar-form navbar-right" role="search">
     <p class="alert-danger">{{errorMsg}}</p>
+    
+    <div v-if="checkUser == ''">
         <div class="form-group">
             <input v-model="login" type="text" class="form-control" name="username" placeholder="Username">
         </div>
@@ -9,8 +11,13 @@
         </div>
         <button v-on:click="loginFun()" type="submit" class="btn btn-default">Sign In</button>
         <router-link class="reg" to="/registration">Registration</router-link>
-
-        <div v-if="checkUser != ''">est hash</div>
+    </div>
+    
+  <div v-else class="form-group">
+    <p>Hello <span>{{login}}</span></p>
+    <p class="myOrders"><router-link class="reg" to="/orders"><button type="submit" class="btn btn-info">My Orders</button></router-link></p>
+    <p class="logout"><button v-on:click="logoutFun()" type="submit" class="btn btn-info">Logout</button></p>
+  </div>
   </div>
 </template>
 
@@ -25,7 +32,7 @@ export default {
         id: '',
         hash: '',
         errorMsg: '',
-        checkUser: ''
+        checkUser: '',
       }
    },
   methods: {
@@ -34,20 +41,22 @@ export default {
       self.errorMsg = ''
         if (self.login && self.pass)
         {
-          // axios.put('http://rest/user6/rest_task1/client/api/users/', {
-          axios.put('http://192.168.0.15/~user6/REST/client/api/users/', {
+          axios.put('http://rest/user6/rest_task1/client/api/users/', {
+          // axios.put('http://192.168.0.15/~user6/REST/client/api/users/', {
             login: self.login,
             pass: self.pass
           }, this.config)
           .then(function (response) {
-            console.log(response);
+            // console.log(response);
             if (response.data.id && response.data.hash)
             {
               self.id = response.data.id
               self.hash = response.data.hash
               localStorage['id'] = JSON.stringify(self.id)
               localStorage['hash'] = JSON.stringify(self.hash)
+              localStorage['login'] = JSON.stringify(self.login)
               self.checkUserFun()
+              self.$parent.getCheck()
               return true
             }
             else {
@@ -63,6 +72,22 @@ export default {
           self.errorMsg = 'Enter data in all fields!'
         }
     }, 
+    logoutFun: function()
+    {
+      var self = this
+      if (localStorage['id'] && localStorage['hash'] && localStorage['login'])
+      {
+        delete localStorage['id']
+        delete localStorage['hash']
+        delete localStorage['login']
+        self.checkUser = ''
+        self.$parent.getCheck()
+        return true
+      }
+      else{
+        return false
+      }
+    },
     checkUserFun: function()
     {
       var self = this
@@ -70,8 +95,8 @@ export default {
       {
         self.id = JSON.parse(localStorage['id'])
         self.hash = JSON.parse(localStorage['hash'])
-        //axios.get('http://rest/user6/rest_task1/client/api/users/' + self.id)
-        axios.get('http://192.168.0.15/~user6/REST/client/api/users/' + self.id)
+        axios.get('http://rest/user6/rest_task1/client/api/users/' + self.id)
+        // axios.get('http://192.168.0.15/~user6/REST/client/api/users/' + self.id)
             .then(function (response) {
             if (response.data !== false)
             {
@@ -81,18 +106,26 @@ export default {
                   return true
               }
             }
-        })
-        .catch(function (error) {
-          console.log(error);
-        });
+            })
+            .catch(function (error) {
+              console.log(error);
+            });
       }
       else{
         return false
+      }
+    },
+    getLogin: function(){
+      var self = this
+      if (localStorage['login'])
+      {
+        self.login = JSON.parse(localStorage['login'])
       }
     }
   },
   created(){
     this.checkUserFun()
+    this.getLogin()
   }
 }
 </script>
@@ -105,5 +138,19 @@ export default {
 }
 .reg{
   padding-left: inherit;
+}
+
+.logout{
+  margin-top: 10px;
+}
+
+.myOrders{
+  margin-top: 10px;
+}
+
+span{
+  font-weight: bolder;
+  font-size: 18px;
+  color: darkblue;
 }
 </style>

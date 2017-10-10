@@ -1,8 +1,7 @@
 <template>
-  <div v-if="car" class="car">
+  <div class="car">
   <p class="title">Car Selected: {{car.brand}}</p>
     <table class="table">
-      <caption></caption>
       <tbody>
       <tr>
         <th>Model</th><td>{{car.model}}</td>
@@ -24,13 +23,18 @@
       </tr>
       </tbody>
     </table>
+    <div class="btnPreOr" v-if="checkUser != ''">
+        <router-link :to="{name: 'order', params: { obj: car }}"><button class="btn alert-warning">Pre-order this Car</button></router-link>
+    </div>
   </div>
 </template>
 
 <script>
+import axios from 'axios'
+import Order from './Order'
 export default {
   name: 'Car',
-  props: ['car']
+  props: ['car', 'checkUser']
 }
 </script>
 
@@ -40,7 +44,7 @@ export default {
   text-align: center;
 }
 
-.table{
+.table {
   width: 500px;
   margin: auto;
 }
@@ -53,5 +57,10 @@ export default {
   color: darkturquoise;
   font-size: 18px;
   font-weight: bold;
+}
+.btnPreOr{
+  width: 500px;
+  float: right;
+  margin-top: 10px;
 }
 </style>
