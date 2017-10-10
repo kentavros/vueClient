@@ -34,8 +34,8 @@ export default {
   methods: {
     getAllCars: function(){
       var self = this
-      axios.get('http://rest/user6/rest_task1/client/api/cars/')
-          // axios.get('http://192.168.0.15/~user6/REST/client/api/cars/')
+      // axios.get('http://rest/user6/rest_task1/client/api/cars/')
+          axios.get('http://192.168.0.15/~user6/REST/client/api/cars/')
             .then(function (response) {
             // console.log(response.data);
             self.cars = response.data
@@ -44,10 +44,10 @@ export default {
           console.log(error);
         });
     },
-    getCarById: function($id){
+    getCarById: function(id){
       var self = this
-      axios.get('http://rest/user6/rest_task1/client/api/cars/' + $id)
-          // axios.get('http://192.168.0.15/~user6/REST/client/api/cars/' + $id)
+      // axios.get('http://rest/user6/rest_task1/client/api/cars/' + id)
+          axios.get('http://192.168.0.15/~user6/REST/client/api/cars/' + id)
             .then(function (response) {
             // console.log(response.data[0]);
             self.car = response.data[0]            

@@ -1,6 +1,7 @@
 <template>
   <div class="registration">
-
+      <p class="alert-danger">{{errorMsg}}</p>
+      <div v-if="success !== 'success'">
         <fieldset>
             <div id="legend">
             <legend class="">Client Registration</legend>
@@ -36,11 +37,15 @@
             <!-- Button -->
             <div class="controls">
                 <button v-on:click="registration()" class="btn btn-success">Register</button>
+                <router-link to='/'><button class="btn btn-info">Back</button></router-link>
             </div>
             </div>
         </fieldset>
-    
-
+    </div>
+    <div v-else class="success">
+        <h2>Thank you {{login}}, press link and login to sait</h2>
+        <router-link class="link" to='/'>Back to main page</router-link>
+    </div>
   </div>
 </template>
 
@@ -50,44 +55,57 @@ export default {
   name: 'registrationForm',
   data(){
       return {
-          login: '',
-          pass: '',
-          passConf: '',
-          config: {
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded'
+        login: '',
+        pass: '',
+        passConf: '',
+        config: {
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
             }
-          }
+        },
+        success: '',
+        errorMsg: ''
       }
   },
   methods: {
       registration: function () {
           var self = this
+          self.errorMsg = ''
           if (self.login && self.pass && self.passConf)
           {
               if (self.pass.length < 3)
               {
-                  alert('Password should be at least 4 characters')
+                  self.errorMsg = 'Password should be at least 4 characters'
+                  return false
               }
               if(self.pass != self.passConf)
               {
-                  alert('Password fields do not match')
+                  self.errorMsg = 'Password fields do not match'
+                  return false
               }
 
               var data = new FormData()
               data.append('login', self.login)
               data.append('pass', self.pass)
-                axios.post('http://rest/user6/rest_task1/client/api/users/', data, this.config)
-                // axios.post('http://192.168.0.15/~user6/REST/client/api/users/', data, this.config)
+                // axios.post('http://rest/user6/rest_task1/client/api/users/', data, this.config)
+                axios.post('http://192.168.0.15/~user6/REST/client/api/users/', data, this.config)
                     .then(function (response) {
                     console.log(response.data);
+                    if (response.data === 1)
+                    {
+                        self.success = 'success'
+                    }
+                    else
+                    {
+                        self.errorMsg = response.data
+                    }
                 })
                     .catch(function (error) {
                     console.log(error);
                 });
           }
           else{
-              alert('Enter data in all fields!')
+              self.errorMsg =  'Enter data in all fields!'
           }
       }
             // testPost: function()
@@ -113,5 +131,18 @@ export default {
 .login{
     width: 200px;
     float: right;
+}
+.success{
+    color: darkblue;
+    text-align: center;
+}
+
+.alert-danger{
+    text-align: center
+}
+
+.link{
+    font-size: 18px;
+    font-weight: bold;
 }
 </style>
