@@ -8,7 +8,9 @@
             <input type="text" class="form-control" name="password" placeholder="Password">
         </div>
         <button type="submit" class="btn btn-default">Sign In</button>
+        <router-link class="reg" to="/registration">Registration</router-link>
     </form>
+    
   </div>
 </template>
 
@@ -23,5 +25,8 @@ export default {
 .login{
     width: 200px;
     float: right;
+}
+.reg{
+  padding-left: inherit;
 }
 </style>

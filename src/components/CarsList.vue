@@ -2,7 +2,6 @@
   <div class="title">
     <div>
     <loginForm></loginForm>
-    <registretionForm></registretionForm>
     </div>
     <div class="cars">
       <ul class="carsList" v-for="car in cars" >
@@ -12,6 +11,9 @@
         </li>
       </ul>
     </div>
+    <div v-if="car == ''">
+      <img src="static/Cars.png">
+    </div> 
     <car :car="car"></car>
   </div>
 </template>
@@ -20,7 +22,7 @@
 import axios from 'axios'
 import Car from './Car'
 import Login from './Login'
-import Registretion from './Registretion'
+
 export default {
   name: 'CarsList',
   data () {
@@ -32,8 +34,8 @@ export default {
   methods: {
     getAllCars: function(){
       var self = this
-      axios.get('http://rest/user6/rest_task1/client/api/cars/', this.config)
-          // axios.get('http://192.168.0.15/~user6/REST/client/api/cars/', this.config)
+      axios.get('http://rest/user6/rest_task1/client/api/cars/')
+          // axios.get('http://192.168.0.15/~user6/REST/client/api/cars/')
             .then(function (response) {
             // console.log(response.data);
             self.cars = response.data
@@ -44,10 +46,10 @@ export default {
     },
     getCarById: function($id){
       var self = this
-      axios.get('http://rest/user6/rest_task1/client/api/cars/' + $id, this.config)
-          // axios.get('http://192.168.0.15/~user6/REST/client/api/cars/', this.config)
+      axios.get('http://rest/user6/rest_task1/client/api/cars/' + $id)
+          // axios.get('http://192.168.0.15/~user6/REST/client/api/cars/' + $id)
             .then(function (response) {
-            console.log(response.data[0]);
+            // console.log(response.data[0]);
             self.car = response.data[0]            
         })
         .catch(function (error) {
@@ -62,8 +64,7 @@ export default {
   },
   components: {
     'Car': Car,
-    'loginForm': Login,
-    'registretionForm': Registretion
+    'loginForm': Login
   }
 }
 </script>
