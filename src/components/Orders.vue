@@ -37,11 +37,8 @@ export default {
   methods: {
     getSelect: function(idOrder){
       var self = this
-      // alert('1')
-      // console.log(idOrder)
-      // console.log(self.selected.key)
-        axios.put('http://rest/user6/rest_task1/client/api/orders/', {
-          // axios.put('http://192.168.0.15/~user6/REST/client/api/orders/', {
+        // axios.put('http://rest/user6/rest_task1/client/api/orders/', {
+          axios.put('http://192.168.0.15/~user6/REST/client/api/orders/', {
           id: idOrder,
           status: self.selected.key
         }, this.config)
@@ -73,8 +70,8 @@ export default {
       {
         return false
       }
-          axios.get('http://rest/user6/rest_task1/client/api/orders/' + self.id_user)
-          // axios.get('http://192.168.0.15/~user6/REST/client/api/orders/' + self.id_user)
+          // axios.get('http://rest/user6/rest_task1/client/api/orders/' + self.id_user)
+          axios.get('http://192.168.0.15/~user6/REST/client/api/orders/' + self.id_user)
             .then(function (response) {
             // console.log(response.data);
             if (Array.isArray(response.data))

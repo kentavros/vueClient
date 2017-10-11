@@ -41,8 +41,8 @@ export default {
   methods: {
     getAllCars: function(){
       var self = this
-          axios.get('http://rest/user6/rest_task1/client/api/cars/')
-          // axios.get('http://192.168.0.15/~user6/REST/client/api/cars/')
+          // axios.get('http://rest/user6/rest_task1/client/api/cars/')
+          axios.get('http://192.168.0.15/~user6/REST/client/api/cars/')
             .then(function (response) {
             // console.log(response.data);
             self.cars = response.data
@@ -63,8 +63,8 @@ export default {
     },
     getCarById: function(id){
       var self = this
-          axios.get('http://rest/user6/rest_task1/client/api/cars/' + id)
-          // axios.get('http://192.168.0.15/~user6/REST/client/api/cars/' + id)
+          // axios.get('http://rest/user6/rest_task1/client/api/cars/' + id)
+          axios.get('http://192.168.0.15/~user6/REST/client/api/cars/' + id)
             .then(function (response) {
             // console.log(response.data[0]);
             self.car = response.data[0]            
@@ -80,8 +80,8 @@ export default {
       {
         self.id = JSON.parse(localStorage['id'])
         self.hash = JSON.parse(localStorage['hash'])
-        axios.get('http://rest/user6/rest_task1/client/api/users/' + self.id)
-        // axios.get('http://192.168.0.15/~user6/REST/client/api/users/' + self.id)
+        // axios.get('http://rest/user6/rest_task1/client/api/users/' + self.id)
+        axios.get('http://192.168.0.15/~user6/REST/client/api/users/' + self.id)
             .then(function (response) {
             if (response.data !== false)
             {
@@ -105,7 +105,6 @@ export default {
   created(){
     this.getAllCars()
     this.checkUserFun()
-    // this.getCarById(1)
   },
   components: {
     'Car': Car,

@@ -97,8 +97,8 @@ export default {
       var data = new FormData();
         data.append('id_car', self.car.id);
         data.append('id_user', self.id_user);
-        axios.post('http://rest/user6/rest_task1/client/api/orders/', data, self.config)
-        // axios.post('http://192.168.0.15/~user6/REST/client/api/orders/', data, self.config)
+        // axios.post('http://rest/user6/rest_task1/client/api/orders/', data, self.config)
+        axios.post('http://192.168.0.15/~user6/REST/client/api/orders/', data, self.config)
         .then(function (response) {
           // console.log(response);
           if (response.data == 1){

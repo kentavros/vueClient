@@ -68,8 +68,8 @@ export default {
     searchByParam: function()
     {
       var self = this
-      var url = 'http://rest/user6/rest_task1/client/api/cars/'
-      // var url = 'http://192.168.0.15/~user6/REST/client/api/cars/'
+      // var url = 'http://rest/user6/rest_task1/client/api/cars/'
+      var url = 'http://192.168.0.15/~user6/REST/client/api/cars/'
       if (!self.year)
       {
         self.err = 'Input Year first!'
@@ -120,8 +120,8 @@ export default {
       {
         self.id = JSON.parse(localStorage['id'])
         self.hash = JSON.parse(localStorage['hash'])
-        axios.get('http://rest/user6/rest_task1/client/api/users/' + self.id)
-        // axios.get('http://192.168.0.15/~user6/REST/client/api/users/' + self.id)
+        // axios.get('http://rest/user6/rest_task1/client/api/users/' + self.id)
+        axios.get('http://192.168.0.15/~user6/REST/client/api/users/' + self.id)
             .then(function (response) {
             if (response.data !== false)
             {

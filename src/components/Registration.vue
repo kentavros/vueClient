@@ -87,8 +87,8 @@ export default {
               var data = new FormData()
               data.append('login', self.login)
               data.append('pass', self.pass)
-                axios.post('http://rest/user6/rest_task1/client/api/users/', data, this.config)
-                // axios.post('http://192.168.0.15/~user6/REST/client/api/users/', data, this.config)
+                // axios.post('http://rest/user6/rest_task1/client/api/users/', data, this.config)
+                axios.post('http://192.168.0.15/~user6/REST/client/api/users/', data, this.config)
                     .then(function (response) {
                     //console.log(response.data);
                     if (response.data === 1)
