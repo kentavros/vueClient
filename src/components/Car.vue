@@ -1,5 +1,5 @@
 <template>
-  <div class="car">
+  <div v-if="car != ''" class="car">
   <p class="title">Car Selected: {{car.brand}}</p>
     <table class="table">
       <tbody>

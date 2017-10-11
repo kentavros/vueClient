@@ -1,5 +1,8 @@
 <template>
   <div class="title">
+    <div class="btnsearch"> 
+    <router-link to='/search'><button type="submit" class="btn btn-info">Search by params</button></router-link>
+    </div>
     <div>
     <loginForm></loginForm>
     </div>
@@ -107,7 +110,6 @@ export default {
   components: {
     'Car': Car,
     'loginForm': Login,
-    
   }
 }
 </script>
@@ -131,5 +133,9 @@ export default {
 }
 .title{
   width: 1000px;
+}
+.btnsearch{
+  margin-left: 40px;
+  margin-bottom: 10px;
 }
 </style>

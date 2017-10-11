@@ -108,20 +108,6 @@ export default {
               self.errorMsg =  'Enter data in all fields!'
           }
       }
-            // testPost: function()
-      // {
-      //   var data = new FormData();
-      //   data.append('login', 'aaaaaa');
-      //   data.append('pass', '123456');
-      //   axios.post('http://rest/user6/rest_task1/client/api/users/', data, this.config)
-      //   // axios.post('http://192.168.0.15/~user6/REST/client/api/users/', data, this.config)
-      //   .then(function (response) {
-      //     console.log(response);
-      //   })
-      //   .catch(function (error) {
-      //     console.log(error);
-      //   });
-      // },
   }
 }
 </script>

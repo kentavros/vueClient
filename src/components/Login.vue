@@ -33,6 +33,11 @@ export default {
         hash: '',
         errorMsg: '',
         checkUser: '',
+        config: {
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+          }
+        }
       }
    },
   methods: {
@@ -45,7 +50,7 @@ export default {
           // axios.put('http://192.168.0.15/~user6/REST/client/api/users/', {
             login: self.login,
             pass: self.pass
-          }, this.config)
+          }, self.config)
           .then(function (response) {
             // console.log(response);
             if (response.data.id && response.data.hash)
